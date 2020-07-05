@@ -1,14 +1,21 @@
+import org.apache.xmlbeans.impl.tool.SchemaCompiler
+
+buildscript {
+	dependencies {
+		classpath group: 'org.apache.xmlbeans', name: 'xmlbeans', version: '3.1.0'
+	}
+}
+
 plugins {
 	id 'fabric-loom' version '0.4-SNAPSHOT'
 	id 'maven-publish'
 }
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
 
-archivesBaseName = project.archives_base_name
-version = project.mod_version
-group = project.maven_group
+archivesBaseName = project.archiveName
+version = project.modVersion
+group = project.mavenGroup
 
 def libblockattributesver = "0.7.0"
 def libguiver = "2.1.1"
@@ -70,9 +77,6 @@ dependencies {
 	modCompile "alexiil.mc.lib:libnetworkstack-base:0.4.0"
 	modCompile "alexiil.mc.mod:simplepipes-all:0.4.0"
 	modImplementation "io.github.prospector:modmenu:1.12.2+build.17"
-
-	// https://mvnrepository.com/artifact/org.apache.xmlbeans/xmlbeans
-	compile group: 'org.apache.xmlbeans', name: 'xmlbeans', version: '3.1.0'
 }
 
 processResources {
@@ -87,6 +91,16 @@ processResources {
 		exclude "fabric.mod.json"
 	}
 }
+
+task generateSchema {
+	def parameters = new SchemaCompiler.Parameters()
+	parameters.classesDir = new File(rootDir, "build/classes/java/main/")
+	parameters.srcDir = new File(rootDir, "build/sources/main/java/")
+	parameters.xsdFiles = [new File(rootDir, "src/main/xsd/FFRecipes.xsd")]
+	SchemaCompiler.compile parameters
+}
+
+tasks.compileJava.dependsOn generateSchema
 
 // ensure that the encoding is set to UTF-8, no matter what the system default is
 // this fixes some edge cases with special characters not displaying correctly
