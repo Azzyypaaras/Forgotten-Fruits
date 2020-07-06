@@ -7,31 +7,31 @@ import net.minecraft.item.Item;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
 
-import static azzy.fabric.forgottenfruits.registry.BlockRegistry.CLOUD_BERRY_JUICE;
-import static azzy.fabric.forgottenfruits.registry.FluidRegistry.CLOUD_BERRY;
-import static azzy.fabric.forgottenfruits.registry.FluidRegistry.CLOUD_BERRY_FLOWING;
-import static azzy.fabric.forgottenfruits.registry.ItemRegistry.CLOUD_BERRY_BUCKET;
+import static azzy.fabric.forgottenfruits.registry.BlockRegistry.CLOUDBERRY_JUICE;
+import static azzy.fabric.forgottenfruits.registry.FluidRegistry.CLOUDBERRY;
+import static azzy.fabric.forgottenfruits.registry.FluidRegistry.CLOUDBERRY_FLOWING;
+import static azzy.fabric.forgottenfruits.registry.ItemRegistry.CLOUDBERRY_BUCKET;
 
 public abstract class JuiceCloudberry extends GenericFluid {
     @Override
     public Fluid getStill() {
-        return CLOUD_BERRY;
+        return CLOUDBERRY;
     }
 
     @Override
     public Fluid getFlowing() {
-        return CLOUD_BERRY_FLOWING;
+        return CLOUDBERRY_FLOWING;
     }
 
     @Override
     public Item getBucketItem() {
-        return CLOUD_BERRY_BUCKET;
+        return CLOUDBERRY_BUCKET;
     }
 
     @Override
     protected BlockState toBlockState(FluidState fluidState) {
         // method_15741 converts the LEVEL_1_8 of the fluid state to the LEVEL_15 the fluid block uses
-        return CLOUD_BERRY_JUICE.getDefaultState().with(Properties.LEVEL_15, method_15741(fluidState));
+        return CLOUDBERRY_JUICE.getDefaultState().with(Properties.LEVEL_15, method_15741(fluidState));
     }
 
     public static class Flowing extends JuiceCloudberry {

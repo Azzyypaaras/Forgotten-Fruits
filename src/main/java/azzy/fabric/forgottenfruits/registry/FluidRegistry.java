@@ -20,9 +20,9 @@ public class FluidRegistry {
     @Environment(EnvType.CLIENT)
     public static final List<Fluid> FLUID_TRANS = new ArrayList<>();
     //Cloudberry
-    public static FlowableFluid CLOUD_BERRY = registerStill("cloud_berry", new JuiceCloudberry.Still());
-    public static FlowableFluid CLOUD_BERRY_FLOWING = registerFlowing("cloud_berry_flowing", new JuiceCloudberry.Flowing());
-    private static final FluidPair cloudberryJuice = new FluidPair(CLOUD_BERRY, CLOUD_BERRY_FLOWING, 0xee9b2f);
+    public static FlowableFluid CLOUDBERRY = registerStill("cloudberry", new JuiceCloudberry.Still());
+    public static FlowableFluid CLOUDBERRY_FLOWING = registerFlowing("cloudberry_flowing", new JuiceCloudberry.Flowing());
+    private static final FluidPair cloudberryJuice = new FluidPair(CLOUDBERRY, CLOUDBERRY_FLOWING, 0xee9b2f);
     //Cinder
     public static FlowableFluid CINDERMOTE = registerStill("cindermote", new JuiceCinder.Still());
     public static FlowableFluid CINDERMOTE_FLOWING = registerFlowing("cindermote_flowing", new JuiceCinder.Flowing());
@@ -30,8 +30,8 @@ public class FluidRegistry {
 
     @Environment(EnvType.CLIENT)
     public static void initTransparency() {
-        FLUID_TRANS.add(CLOUD_BERRY);
-        FLUID_TRANS.add(CLOUD_BERRY_FLOWING);
+        FLUID_TRANS.add(CLOUDBERRY);
+        FLUID_TRANS.add(CLOUDBERRY_FLOWING);
         FLUID_TRANS.add(CINDERMOTE);
         FLUID_TRANS.add(CINDERMOTE_FLOWING);
     }

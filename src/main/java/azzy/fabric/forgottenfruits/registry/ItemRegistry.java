@@ -18,7 +18,7 @@ import static azzy.fabric.forgottenfruits.ForgottenFruits.*;
 
 public class ItemRegistry extends Item {
 
-    public static Item CLOUD_BERRY_FRUIT, CLOUD_BERRY_SEEDS, CLOUD_BERRY_DRINK;
+    public static Item CLOUDBERRY_FRUIT, CLOUDBERRY_SEEDS, CLOUDBERRY_DRINK;
     public static Item IGNOBLE_SILK;
     public static Item BASKET_ITEM;
     public static Item CINDERMOTE_FRUIT, CINDERMOTE_SEEDS, CINDERMOTE_DRINK;
@@ -28,7 +28,7 @@ public class ItemRegistry extends Item {
     public static Item ATTUNED, ATTUNED_EFFULGENT, ATTUNED_CHAOTIC;
     public static Item MUTANDIS;
     public static final List<AmalgamItems.ConstructAmalgam> AMALGAM_REGISTRY = new ArrayList<>();
-    public static Item CLOUD_BERRY_BUCKET;
+    public static Item CLOUDBERRY_BUCKET;
     public static Item CINDERMOTE_BUCKET;
 
     private ItemRegistry(Item.Settings settings) {
@@ -49,7 +49,7 @@ public class ItemRegistry extends Item {
         MUTANDIS = register(new Identifier(MOD_ID, "mutandis"), new Item(defaultSettings()));
 
         //Drinks
-        CLOUD_BERRY_DRINK = register(new Identifier(MOD_ID, "drinkcloudberry"), new LiquorBottle(drinkSettings()));
+        CLOUDBERRY_DRINK = register(new Identifier(MOD_ID, "drinkcloudberry"), new LiquorBottle(drinkSettings()));
         CINDERMOTE_DRINK = register(new Identifier(MOD_ID, "drinkcindermote"), new LiquorBottle(drinkSettings()));
 
         //Threads
@@ -62,14 +62,14 @@ public class ItemRegistry extends Item {
         APPLE_ALLOY = register(new Identifier(MOD_ID, "apple_alloy"), new Item(new Item.Settings().group(PLANT_MATERIALS)));
 
         //Berries
-        CLOUD_BERRY_FRUIT = register(new Identifier(MOD_ID, "cloud_berry_fruit"), new Item(defaultSettings().food(FoodItems.FoodBackendSpecial(3, 0.5f, true, false, StatusEffects.LEVITATION, 0.1f, 200))));
+        CLOUDBERRY_FRUIT = register(new Identifier(MOD_ID, "cloudberry_fruit"), new Item(defaultSettings().food(FoodItems.FoodBackendSpecial(3, 0.5f, true, false, StatusEffects.LEVITATION, 0.1f, 200))));
         CINDERMOTE_FRUIT = register(new Identifier(MOD_ID, "cinde_rmote_fruit"), new Item(defaultSettings().food(FoodItems.FoodBackend(6, 0.3f, false)).fireproof()));
 
         //Seeds
-        CLOUD_BERRY_SEEDS = register(new Identifier(MOD_ID, "cloud_berry_seeds"), new AliasedBlockItem(CropRegistry.CLOUD_BERRY_CROP, defaultSettings().food(FoodItems.FoodBackendSpecial(-3, -2f, false, false, StatusEffects.LEVITATION, 1f, 600))));
+        CLOUDBERRY_SEEDS = register(new Identifier(MOD_ID, "cloudberry_seeds"), new AliasedBlockItem(CropRegistry.CLOUDBERRY_CROP, defaultSettings().food(FoodItems.FoodBackendSpecial(-3, -2f, false, false, StatusEffects.LEVITATION, 1f, 600))));
         CINDERMOTE_SEEDS = register(new Identifier(MOD_ID, "cindermote_seeds"), new AliasedBlockItem(CropRegistry.CINDERMOTE_CROP, defaultSettings().fireproof()));
 
-        CLOUD_BERRY_BUCKET = registerBucket("cloud_berry_bucket", FluidRegistry.CLOUD_BERRY);
+        CLOUDBERRY_BUCKET = registerBucket("cloudberry_bucket", FluidRegistry.CLOUDBERRY);
         CINDERMOTE_BUCKET = registerBucket("cinder_juice_bucket", FluidRegistry.CINDERMOTE);
 
         //Jellies
