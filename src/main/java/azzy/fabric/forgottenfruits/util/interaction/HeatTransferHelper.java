@@ -40,7 +40,6 @@ public class HeatTransferHelper {
     public static <T extends HeatHolder> void simulateHeat(HeatMaterial medium, T bodyA, Block bodyB) {
         HeatSource source = heatMap.get(bodyB);
         double flux = calculateHeat(medium, bodyA.getHeat(), source);
-        flux = bodyA.getHeat() > source.temp ? -flux : flux;
         bodyA.moveHeat(-flux);
     }
 

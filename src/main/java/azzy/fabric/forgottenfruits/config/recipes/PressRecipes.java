@@ -20,15 +20,15 @@ import static azzy.fabric.forgottenfruits.ForgottenFruits.config;
 public class PressRecipes extends RecipeTemplate<FFPressRecipe> {
     public PressRecipes() {
 //        Queue<Iterator<String>> recipes = JanksonRecipeParser.getRecipeQueue(RecipeRegistryKey.PRESS);
-        Queue<Iterator<String>> recipes = null;
-        while (recipes.peek() != null) {
-            Iterator<String> recipeBits = recipes.poll();
-            try {
-                inject(recipeBits.next(), Integer.parseInt(recipeBits.next()), recipeBits.next(), recipeBits.next(), recipeBits.next());
-            } catch (NoSuchElementException e) {
-                FFLog.error("A PRESS RECIPE IS INVALID");
-            }
-        }
+//        Queue<Iterator<String>> recipes = null;
+        //while (recipes.peek() != null) {
+        //    Iterator<String> recipeBits = recipes.poll();
+        //    try {
+        //        inject(recipeBits.next(), Integer.parseInt(recipeBits.next()), recipeBits.next(), recipeBits.next(), recipeBits.next());
+        //    } catch (NoSuchElementException e) {
+        //        FFLog.error("A PRESS RECIPE IS INVALID");
+        //    }
+        //}
     }
 
     private void inject(String in, int amount, String by, String out, String id) {

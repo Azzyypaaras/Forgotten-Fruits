@@ -18,15 +18,15 @@ import static azzy.fabric.forgottenfruits.ForgottenFruits.FFLog;
 public class CauldronRecipes extends RecipeTemplate<FFCauldronRecipe> {
     public CauldronRecipes() {
 //        Queue<Iterator<String>> recipes = JanksonRecipeParser.getRecipeQueue(RecipeRegistryKey.CAULDRON);
-        Queue<Iterator<String>> recipes = null;
-        while (recipes.peek() != null) {
-            Iterator<String> recipeBits = recipes.poll();
-            try {
-                inject(recipeBits.next(), Registry.ITEM.get(new Identifier(recipeBits.next())), Registry.ITEM.get(new Identifier(recipeBits.next())), Integer.parseInt(recipeBits.next()), recipeBits.next());
-            } catch (NoSuchElementException e) {
-                FFLog.error("A CAULDRON RECIPE IS INVALID");
-            }
-        }
+//        Queue<Iterator<String>> recipes = null;
+//        while (recipes.peek() != null) {
+//            Iterator<String> recipeBits = recipes.poll();
+//            try {
+//                inject(recipeBits.next(), Registry.ITEM.get(new Identifier(recipeBits.next())), Registry.ITEM.get(new Identifier(recipeBits.next())), Integer.parseInt(recipeBits.next()), recipeBits.next());
+//            } catch (NoSuchElementException e) {
+//                FFLog.error("A CAULDRON RECIPE IS INVALID");
+//            }
+//        }
     }
 
     private void inject(String id, Item brew, Item output, int amount, String rawInputs) {

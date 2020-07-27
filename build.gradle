@@ -42,11 +42,11 @@ repositories {
 dependencies {
 	//to change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:1.16.1"
-	mappings "net.fabricmc:yarn:1.16.1+build.4:v2"
-	modImplementation "net.fabricmc:fabric-loader:0.8.8+build.202"
+	mappings "net.fabricmc:yarn:1.16.1+build.21:v2"
+	modImplementation "net.fabricmc:fabric-loader:0.9.0+build.204"
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
-	modImplementation  "net.fabricmc.fabric-api:fabric-api:0.13.1+build.370-1.16"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:0.15.1+build.380-1.16.1"
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.
 
@@ -63,7 +63,7 @@ dependencies {
 	include "me.sargunvohra.mcmods:autoconfig1u:"+autoconfver
 
 	//REQUIRED IF WORKING ON THE HQ SHADERPACK
-	modCompile "grondag:canvas-mc116:1.0.+"
+	modCompile "grondag:canvas-mc116:1.0.839"
 
 	//NOTE, TESTING ONLY, NOT LIBRARIES, DO NOT IMPLEMENT AS LIBRARIES, DO NOT USE IN CODE
 	modCompile "alexiil.mc.lib:libmultipart-all:0.4.0"
