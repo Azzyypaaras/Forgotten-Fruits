@@ -69,14 +69,27 @@ dependencies {
 	include "me.shedaniel.cloth:config-2:"+clothconfver
 	include "me.sargunvohra.mcmods:autoconfig1u:"+autoconfver
 
+	compile group: 'org.apache.xmlbeans', name: 'xmlbeans', version: '3.1.0'
+
 	//REQUIRED IF WORKING ON THE HQ SHADERPACK
-	modCompile "grondag:canvas-mc116:1.0.+"
+	//modCompile "grondag:canvas-mc116:1.0.+"
 
 	//NOTE, TESTING ONLY, NOT LIBRARIES, DO NOT IMPLEMENT AS LIBRARIES, DO NOT USE IN CODE
 	modCompile "alexiil.mc.lib:libmultipart-all:0.4.0"
 	modCompile "alexiil.mc.lib:libnetworkstack-base:0.4.0"
 	modCompile "alexiil.mc.mod:simplepipes-all:0.4.0"
 	modImplementation "io.github.prospector:modmenu:1.12.2+build.17"
+
+
+	def parameters = new SchemaCompiler.Parameters()
+	def output = new File(buildDir, "xml.jar");
+	parameters.classesDir = new File(buildDir, "generated")
+	parameters.srcDir = parameters.classesDir
+	parameters.xsdFiles = [new File(rootDir, "xsd/FFRecipes.xsd")]
+	parameters.outputJar = output
+	SchemaCompiler.compile parameters
+
+	include files(output)
 }
 
 processResources {
@@ -91,16 +104,6 @@ processResources {
 		exclude "fabric.mod.json"
 	}
 }
-
-task generateSchema {
-	def parameters = new SchemaCompiler.Parameters()
-	parameters.classesDir = new File(rootDir, "build/classes/java/main/")
-	parameters.srcDir = new File(rootDir, "build/sources/main/java/")
-	parameters.xsdFiles = [new File(rootDir, "src/main/xsd/FFRecipes.xsd")]
-	SchemaCompiler.compile parameters
-}
-
-tasks.compileJava.dependsOn generateSchema
 
 // ensure that the encoding is set to UTF-8, no matter what the system default is
 // this fixes some edge cases with special characters not displaying correctly
