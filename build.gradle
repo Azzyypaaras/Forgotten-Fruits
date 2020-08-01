@@ -63,7 +63,7 @@ dependencies {
 	include "me.sargunvohra.mcmods:autoconfig1u:"+autoconfver
 
 	//REQUIRED IF WORKING ON THE HQ SHADERPACK
-	modCompile "grondag:canvas-mc116:1.0.839"
+	//modCompile "grondag:canvas-mc116:1.0.839"
 
 	//NOTE, TESTING ONLY, NOT LIBRARIES, DO NOT IMPLEMENT AS LIBRARIES, DO NOT USE IN CODE
 	modCompile "alexiil.mc.lib:libmultipart-all:0.4.0"

@@ -12,6 +12,7 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import static azzy.fabric.forgottenfruits.ForgottenFruits.MOD_ID;
 import static azzy.fabric.forgottenfruits.registry.ItemRegistry.*;
@@ -34,8 +35,8 @@ public class CropRegistry {
     public static final Block VOMPOLLOLOWM_WILD_STALK = register("vompollolowm_wild_stalk", new WildPlantBase(PLANTTYPE.NULL, VOMPOLLOLOWM, BlockSoundGroup.CROP, VoxelShapes.cuboid(0.4375, 0, 0.4375, 0.5625, 1, 0.5625), true, ContextConsumer.of(PlantReferences::vompollolowmBreakTick, SCHEDULED), ContextConsumer.of(PlantReferences::vompollolowmScheduler, BROKEN)));
     public static final Block VOMPOLLOLOWM_WILD_FRUIT = register("vompollolowm_wild_fruit", new WildPlantBase(PLANTTYPE.NULL, VOMPOLLOLOWM, BlockSoundGroup.CROP, VoxelShapes.cuboid(0.125, 0.125, 0.125, 0.875, 0.875, 0.875), true, ContextConsumer.of(PlantReferences::vompollolowmBreakTick, SCHEDULED), ContextConsumer.of(PlantReferences::vompollolowmScheduler, BROKEN)));
 
-    public static final Block JELLY_PEAR_CROP = register("jelly_pear_crop", new PlantBase(PLANTTYPE.AQUATIC,4, Material.UNDERWATER_PLANT, BlockSoundGroup.WET_GRASS, JELLY_PEAR_SEEDS, 4, 12, null, false, Fluids.WATER.getStill(false)));
-    public static final Block JELLY_PEAR_WILD = register("jelly_pear_wild", new WildPlantBase(PLANTTYPE.AQUATIC, Material.UNDERWATER_PLANT, BlockSoundGroup.WET_GRASS, null, false, Fluids.WATER.getStill(false)));
+    public static final Block JELLY_PEAR_CROP = register("jelly_pear_crop", new PlantBase(PLANTTYPE.AQUATIC,4, Material.UNDERWATER_PLANT, BlockSoundGroup.WET_GRASS, JELLY_PEAR_SEEDS, 4, 12, VoxelShapes.cuboid(0.125, 0, 0.125, 0.875, 0.25, 0.875), false, Fluids.WATER.getStill(false)));
+    public static final Block JELLY_PEAR_WILD = register("jelly_pear_wild", new WildPlantBase(PLANTTYPE.AQUATIC, Material.UNDERWATER_PLANT, BlockSoundGroup.WET_GRASS, VoxelShapes.cuboid(0.125, 0, 0.125, 0.875, 0.25, 0.875), false, Fluids.WATER.getStill(false)));
 
     private static Block register(String name, Block item) {
         Registry.register(Registry.BLOCK, new Identifier(MOD_ID, name), item);
