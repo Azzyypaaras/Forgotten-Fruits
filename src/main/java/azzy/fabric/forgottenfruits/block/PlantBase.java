@@ -56,6 +56,20 @@ public class PlantBase extends CropBlock implements FluidFillable {
         this.fluid = Fluids.EMPTY.getDefaultState();
     }
 
+    public PlantBase(FabricBlockSettings settings, PLANTTYPE type, int stages, Material material, BlockSoundGroup sound, ItemConvertible seeds, int minLight, int maxLight, ContextConsumer ... consumers) {
+        super(settings);
+        maxAge = stages - 1;
+        this.setDefaultState((this.getStateManager().getDefaultState()).with(this.getAgeProperty(), 0));
+        this.minLight = minLight;
+        this.maxLight = maxLight;
+        this.seeds = seeds;
+        this.shape = DEFAULT;
+        this.type = type;
+        this.contextConsumers = ContextMap.construct(consumers);
+        this.solid = false;
+        this.fluid = Fluids.EMPTY.getDefaultState();
+    }
+
     @Override
     public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
         return new ItemStack(this.getSeedsItem());

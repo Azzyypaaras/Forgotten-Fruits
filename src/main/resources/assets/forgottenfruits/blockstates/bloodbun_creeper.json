@@ -1,0 +1,250 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "down": "true", "age": 0
+      },
+      "apply": {
+        "model": "forgottenfruits:block/crops/bloodbun/bloodbun_0"
+      }
+    },
+    {
+      "when": {
+        "down": "true", "age": 1
+      },
+      "apply": {
+        "model": "forgottenfruits:block/crops/bloodbun/bloodbun_1"
+      }
+    },
+    {
+      "when": {
+        "down": "true", "age": 2
+      },
+      "apply": {
+        "model": "forgottenfruits:block/crops/bloodbun/bloodbun_2"
+      }
+    },
+    {
+      "when": {
+        "up": "true", "age": 0
+      },
+      "apply": {
+        "model": "forgottenfruits:block/crops/bloodbun/bloodbun_0",
+        "x": 180
+      }
+    },
+    {
+      "when": {
+        "up": "true", "age": 1
+      },
+      "apply": {
+        "model": "forgottenfruits:block/crops/bloodbun/bloodbun_1",
+        "x": 180
+      }
+    },
+    {
+      "when": {
+        "up": "true", "age": 2
+      },
+      "apply": {
+        "model": "forgottenfruits:block/crops/bloodbun/bloodbun_2",
+        "x": 180
+      }
+    },
+    {
+      "when": {
+        "north": "true", "age": 0
+      },
+      "apply": {
+        "model": "forgottenfruits:block/crops/bloodbun/bloodbun_0_side",
+        "x": 90,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "north": "true", "age": 1
+      },
+      "apply": {
+        "model": "forgottenfruits:block/crops/bloodbun/bloodbun_1_side",
+        "x": 90,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "north": "true", "age": 2
+      },
+      "apply": {
+        "model": "forgottenfruits:block/crops/bloodbun/bloodbun_2_side",
+        "x": 90,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "south": "true", "age": 0
+      },
+      "apply": {
+        "model": "forgottenfruits:block/crops/bloodbun/bloodbun_0_side",
+        "x": 90,
+        "y": 0
+      }
+    },
+    {
+      "when": {
+        "south": "true", "age": 1
+      },
+      "apply": {
+        "model": "forgottenfruits:block/crops/bloodbun/bloodbun_1_side",
+        "x": 90,
+        "y": 0
+      }
+    },
+    {
+      "when": {
+        "south": "true", "age": 2
+      },
+      "apply": {
+        "model": "forgottenfruits:block/crops/bloodbun/bloodbun_2_side",
+        "x": 90,
+        "y": 0
+      }
+    },
+    {
+      "when": {
+        "east": "true", "age": 0
+      },
+      "apply": {
+        "model": "forgottenfruits:block/crops/bloodbun/bloodbun_0_side_2",
+        "x": 90,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "east": "true", "age": 1
+      },
+      "apply": {
+        "model": "forgottenfruits:block/crops/bloodbun/bloodbun_1_side_2",
+        "x": 90,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "east": "true", "age": 2
+      },
+      "apply": {
+        "model": "forgottenfruits:block/crops/bloodbun/bloodbun_2_side_2",
+        "x": 90,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "west": "true", "age": 0
+      },
+      "apply": {
+        "model": "forgottenfruits:block/crops/bloodbun/bloodbun_0_side_2",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "west": "true", "age": 1
+      },
+      "apply": {
+        "model": "forgottenfruits:block/crops/bloodbun/bloodbun_1_side_2",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "west": "true", "age": 2
+      },
+      "apply": {
+        "model": "forgottenfruits:block/crops/bloodbun/bloodbun_2_side_2",
+        "x": 90,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "up": "true", "age": 0, "hangers": "true", "long": "false"
+      },
+      "apply": {
+        "model": "forgottenfruits:block/crops/bloodbun/bloodbun_hanger_0"
+      }
+    },
+    {
+      "when": {
+        "up": "true", "age": 1, "hangers": "true", "long": "false"
+      },
+      "apply": {
+        "model": "forgottenfruits:block/crops/bloodbun/bloodbun_hanger_1"
+      }
+    },
+    {
+      "when": {
+        "up": "true", "age": 2, "hangers": "true", "long": "false"
+      },
+      "apply": {
+        "model": "forgottenfruits:block/crops/bloodbun/bloodbun_hanger_2"
+      }
+    },
+    {
+      "when": {
+        "up": "true", "age": 0, "hangers": "true", "long": "true"
+      },
+      "apply": {
+        "model": "forgottenfruits:block/crops/bloodbun/bloodbun_long_hanger_0"
+      }
+    },
+    {
+      "when": {
+        "up": "true", "age": 1, "hangers": "true", "long": "true"
+      },
+      "apply": {
+        "model": "forgottenfruits:block/crops/bloodbun/bloodbun_long_hanger_1"
+      }
+    },
+    {
+      "when": {
+        "up": "true", "age": 2, "hangers": "true", "long": "true"
+      },
+      "apply": {
+        "model": "forgottenfruits:block/crops/bloodbun/bloodbun_long_hanger_2"
+      }
+    },
+    {
+      "when": {
+        "down": "true", "age": 0, "hangers": "true", "long": "false"
+      },
+      "apply": {
+        "model": "forgottenfruits:block/crops/bloodbun/bloodbun_hanger_0",
+        "x":180
+      }
+    },
+    {
+      "when": {
+        "down": "true", "age": 1, "hangers": "true", "long": "false"
+      },
+      "apply": {
+        "model": "forgottenfruits:block/crops/bloodbun/bloodbun_hanger_1",
+        "x": 180
+      }
+    },
+    {
+      "when": {
+        "down": "true", "age": 2, "hangers": "true", "long": "false"
+      },
+      "apply": {
+        "model": "forgottenfruits:block/crops/bloodbun/bloodbun_hanger_2",
+        "x": 180
+      }
+    }
+  ]
+}

@@ -1,6 +1,8 @@
 package azzy.fabric.forgottenfruits.registry;
 
 import azzy.fabric.forgottenfruits.block.*;
+import azzy.fabric.forgottenfruits.block.Plant.BloodbunCreeper;
+import azzy.fabric.forgottenfruits.block.Plant.BloodbunHeart;
 import azzy.fabric.forgottenfruits.block.Plant.PlantReferences;
 import azzy.fabric.forgottenfruits.util.interaction.PlantType.*;
 import azzy.fabric.forgottenfruits.util.context.ContextConsumer;
@@ -15,12 +17,15 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import static azzy.fabric.forgottenfruits.ForgottenFruits.MOD_ID;
+import static azzy.fabric.forgottenfruits.registry.BlockRegistry.REGISTRY_PARTIAL;
+import static azzy.fabric.forgottenfruits.registry.BlockRegistry.REGISTRY_TRANS;
 import static azzy.fabric.forgottenfruits.registry.ItemRegistry.*;
 import static azzy.fabric.forgottenfruits.util.context.PlantPackage.Context.*;
 
 public class CropRegistry {
 
     private static final Material VOMPOLLOLOWM = (new FabricMaterialBuilder(MaterialColor.FOLIAGE)).lightPassesThrough().destroyedByPiston().burnable().allowsMovement().build();
+    private static final Material BLOODBUN = (new FabricMaterialBuilder(MaterialColor.FOLIAGE)).destroyedByPiston().allowsMovement().burnable().lightPassesThrough().build();
 
     public static final Block CLOUD_BERRY_CROP = register("cloudberry_crop", new PlantBase(PLANTTYPE.FARM, 6, Material.PLANT, BlockSoundGroup.CROP, CLOUD_BERRY_SEEDS, 8, 16));
     public static final Block CLOUD_BERRY_WILD = register("cloudberry_wild", new WildPlantBase(PLANTTYPE.GENERIC, Material.PLANT, BlockSoundGroup.CROP));
@@ -38,8 +43,13 @@ public class CropRegistry {
     public static final Block JELLY_PEAR_CROP = register("jelly_pear_crop", new PlantBase(PLANTTYPE.AQUATIC,4, Material.UNDERWATER_PLANT, BlockSoundGroup.WET_GRASS, JELLY_PEAR_SEEDS, 4, 12, VoxelShapes.cuboid(0.125, 0, 0.125, 0.875, 0.25, 0.875), false, Fluids.WATER.getStill(false)));
     public static final Block JELLY_PEAR_WILD = register("jelly_pear_wild", new WildPlantBase(PLANTTYPE.AQUATIC, Material.UNDERWATER_PLANT, BlockSoundGroup.WET_GRASS, VoxelShapes.cuboid(0.125, 0, 0.125, 0.875, 0.25, 0.875), false, Fluids.WATER.getStill(false)));
 
+    public static Block BLOODBUN_CROP = register("bloodbun_crop", new BloodbunHeart(PLANTTYPE.GENERIC, 2, BLOODBUN, BlockSoundGroup.SWEET_BERRY_BUSH, BLOODBUN_SEEDS, 6, 16));
+    public static Block BLOODBUN_CREEPER = register("bloodbun_creeper", new BloodbunCreeper(PLANTTYPE.NULL, 3, BLOODBUN, BlockSoundGroup.SWEET_BERRY_BUSH, BLOODBUN_SEEDS, 6, 16));
+
     private static Block register(String name, Block item) {
         Registry.register(Registry.BLOCK, new Identifier(MOD_ID, name), item);
+        REGISTRY_PARTIAL.add(item);
+        REGISTRY_TRANS.add(item);
         return item;
     }
 

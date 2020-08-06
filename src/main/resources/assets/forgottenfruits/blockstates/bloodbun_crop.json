@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "forgottenfruits:block/crops/bloodbun/bloodbun_0"
+    },
+    "age=1": {
+      "model": "forgottenfruits:block/crops/bloodbun/bloodbun_heart"
+    }
+  }
+}

@@ -23,6 +23,7 @@ public class ItemRegistry extends Item {
     public static Item CINDERMOTE_FRUIT, CINDERMOTE_SEEDS, CINDERMOTE_DRINK;
     public static Item VOMPOLLOLOWM_FRUIT, VOMPOLLOLOWM_SEEDS, VOMPOLLOLOWM_DRINK;
     public static Item JELLY_PEAR_FRUIT, JELLY_PEAR_SEEDS, JELLY_PEAR_DRINK;
+    public static Item BLOODBUN_FRUIT, BLOODBUN_SEEDS, BLOODBUN_DRINK;
     public static Item IGNOBLE_SILK;
     public static Item BASKET_ITEM;
     public static Item APPLE_ALLOY;
@@ -70,12 +71,14 @@ public class ItemRegistry extends Item {
         CINDERMOTE_FRUIT = register(new Identifier(MOD_ID, "cindermote_fruit"), new Item(defaultSettings().food(FoodItems.FoodBackend(6, 0.3f, false)).fireproof()));
         VOMPOLLOLOWM_FRUIT = register(new Identifier(MOD_ID, "vompollolowm_fruit"), new Item(defaultSettings().food(FoodItems.FoodBackendSpecial(4, 1.0f, false, false, StatusEffects.SLOW_FALLING, 0.05f, 100))));
         JELLY_PEAR_FRUIT = register(new Identifier(MOD_ID, "jelly_pear_fruit"), new Item(defaultSettings().food(FoodItems.FoodBackendSpecial(2, 3.0f, true, false, StatusEffects.DOLPHINS_GRACE, 0.075f, 100))));
+        BLOODBUN_FRUIT = register(new Identifier(MOD_ID, "bloodbun_fruit"), new Item(defaultSettings().food(FoodItems.FoodBackendSpecial(1, 0.5f, true, true, StatusEffects.HEALTH_BOOST, 0.02f, 600))));
 
         //Seeds
         CLOUD_BERRY_SEEDS = register(new Identifier(MOD_ID, "cloudberry_seeds"), new AliasedBlockItem(CropRegistry.CLOUD_BERRY_CROP, defaultSettings().food(FoodItems.FoodBackendSpecial(-6, -2f, false, false, StatusEffects.LEVITATION, 1f, 300))));
         CINDERMOTE_SEEDS = register(new Identifier(MOD_ID, "cindermote_seeds"), new AliasedBlockItem(CropRegistry.CINDERMOTE_CROP, defaultSettings().fireproof()));
         VOMPOLLOLOWM_SEEDS = register(new Identifier(MOD_ID, "vompollolowm_seeds"), new AliasedBlockItem(CropRegistry.VOMPOLLOLOWM_CROP_BASE, defaultSettings()));
         JELLY_PEAR_SEEDS = register(new Identifier(MOD_ID, "jelly_pear_seeds"), new AliasedBlockItem(CropRegistry.JELLY_PEAR_CROP, defaultSettings()));
+        BLOODBUN_SEEDS = register(new Identifier(MOD_ID, "bloodbun_seeds"), new AliasedBlockItem(CropRegistry.BLOODBUN_CROP, defaultSettings()));
 
         CLOUD_BERRY_BUCKET = registerBucket("cloudberry_bucket", FluidRegistry.CLOUD_BERRY);
         CINDERMOTE_BUCKET = registerBucket("cinder_juice_bucket", FluidRegistry.CINDERMOTE);
