@@ -40,6 +40,7 @@ public class PlantPackage {
         RAIN,
         DISPlAY,
         SCHEDULED,
-        BROKEN
+        BROKEN,
+        FERTILIZATION
     }
 }

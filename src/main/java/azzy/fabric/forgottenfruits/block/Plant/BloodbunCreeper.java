@@ -50,7 +50,7 @@ public class BloodbunCreeper extends PlantBase implements BlockEntityProvider {
     private static final BooleanProperty LOCKED = BooleanProperty.of("locked");
 
     public BloodbunCreeper(PlantType.PLANTTYPE type, int stages, Material material, BlockSoundGroup sound, ItemConvertible seeds, int minLight, int maxLight, ContextConsumer... consumers) {
-        super(FabricBlockSettings.of(material).sounds(sound).breakInstantly().ticksRandomly().noCollision().lightLevel(e -> e.get(AGE) >= 2 ? 6 : 0), type, stages, material, sound, seeds, minLight, maxLight, consumers);
+        super(FabricBlockSettings.of(material).sounds(sound).breakInstantly().ticksRandomly().noCollision().lightLevel(e -> e.get(AGE) >= 2 ? 6 : 0), type, stages, seeds, minLight, maxLight, true, consumers);
         setDefaultState(getDefaultState().with(PROPERTY_MAP.get(Direction.DOWN), true).with(PROPERTY_MAP.get(Direction.UP), false).with(PROPERTY_MAP.get(Direction.NORTH), false).with(PROPERTY_MAP.get(Direction.EAST), false).with(PROPERTY_MAP.get(Direction.SOUTH), false).with(PROPERTY_MAP.get(Direction.WEST), false).with(LOCKED, false).with(HANGERS, false).with(LONG, false));
     }
 
@@ -153,6 +153,8 @@ public class BloodbunCreeper extends PlantBase implements BlockEntityProvider {
         if(calcState(world, pos))
             return;
         BloodbunCreeperEntity creeper = (BloodbunCreeperEntity) world.getBlockEntity(pos);
+        if(creeper == null)
+            world.breakBlock(pos, false);
         BloodbunEntity parent = (BloodbunEntity) world.getBlockEntity((creeper).getParent());
         if(parent != null) {
             if(state.get(AGE) < creeper.getMaxStage())
@@ -175,14 +177,16 @@ public class BloodbunCreeper extends PlantBase implements BlockEntityProvider {
                     if(state.get(PROPERTY_MAP.get(direction)) && canPlantOn(world.getBlockState(floorPos), world, floorPos, direction)){
                         success = true;
                         world.setBlockState(potentialChild, BLOODBUN_CREEPER.getDefaultState());
-                        BloodbunCreeperEntity childCreeper = (BloodbunCreeperEntity) world.getBlockEntity(potentialChild);
-                        if(childCreeper != null) {
-                            childCreeper.setParent(parentCreeper.getParent());
-                            childCreeper.setRandomMaxAge(world.getRandom());
+                        BlockEntity childCreeper = world.getBlockEntity(potentialChild);
+                        if(childCreeper instanceof BloodbunCreeperEntity) {
+                            ((BloodbunCreeperEntity) childCreeper).setParent(parentCreeper.getParent());
+                            BlockEntity parent = world.getBlockEntity(parentCreeper.getParent());
+                            ((BloodbunCreeperEntity) childCreeper).setRandomMaxAge(world.getRandom());
+                            if (parent instanceof BloodbunEntity) {
+                                ((BloodbunEntity) parent).addChild();
+                            }
+                            calcState(world, potentialChild);
                         }
-                        ((BloodbunEntity) world.getBlockEntity(parentCreeper.getParent())).addChild();
-                        calcState(world, potentialChild);
-                        break;
                     }
                 }
             if(!success){

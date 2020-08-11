@@ -24,6 +24,7 @@ public class ItemRegistry extends Item {
     public static Item VOMPOLLOLOWM_FRUIT, VOMPOLLOLOWM_SEEDS, VOMPOLLOLOWM_DRINK;
     public static Item JELLY_PEAR_FRUIT, JELLY_PEAR_SEEDS, JELLY_PEAR_DRINK;
     public static Item BLOODBUN_FRUIT, BLOODBUN_SEEDS, BLOODBUN_DRINK;
+    public static Item HAGGSTORM_FRUIT, HAGGSTORM_SEEDS, HAGGSTORM_DRINK, HAGGSTORM_GRILLED;
     public static Item IGNOBLE_SILK;
     public static Item BASKET_ITEM;
     public static Item APPLE_ALLOY;
@@ -47,10 +48,12 @@ public class ItemRegistry extends Item {
 
         //Misc
         MULCH = register(new Identifier(MOD_ID, "mulch"), new Item(new Item.Settings().group(PLANT_MATERIALS)));
+        MUTANDIS = register(new Identifier(MOD_ID, "mutandis"), new Item(defaultSettings()));
+
+        //Ingredients
         ATTUNED = register(new Identifier(MOD_ID, "attuned_stone"), new Item(new Item.Settings().group(PLANT_MATERIALS)));
         ATTUNED_EFFULGENT = register(new Identifier(MOD_ID, "effulgent_stone"), new AttunedAttunedStone(new Item.Settings().group(PLANT_MATERIALS)));
         ATTUNED_CHAOTIC = register(new Identifier(MOD_ID, "chaotic_stone"), new AttunedAttunedStone(new Item.Settings().group(PLANT_MATERIALS)));
-        MUTANDIS = register(new Identifier(MOD_ID, "mutandis"), new Item(defaultSettings()));
 
         //Drinks
         CLOUD_BERRY_DRINK = register(new Identifier(MOD_ID, "drinkcloudberry"), new LiquorBottle(drinkSettings()));
@@ -72,6 +75,7 @@ public class ItemRegistry extends Item {
         VOMPOLLOLOWM_FRUIT = register(new Identifier(MOD_ID, "vompollolowm_fruit"), new Item(defaultSettings().food(FoodItems.FoodBackendSpecial(4, 1.0f, false, false, StatusEffects.SLOW_FALLING, 0.05f, 100))));
         JELLY_PEAR_FRUIT = register(new Identifier(MOD_ID, "jelly_pear_fruit"), new Item(defaultSettings().food(FoodItems.FoodBackendSpecial(2, 3.0f, true, false, StatusEffects.DOLPHINS_GRACE, 0.075f, 100))));
         BLOODBUN_FRUIT = register(new Identifier(MOD_ID, "bloodbun_fruit"), new Item(defaultSettings().food(FoodItems.FoodBackendSpecial(1, 0.5f, true, true, StatusEffects.HEALTH_BOOST, 0.02f, 600))));
+        HAGGSTORM_FRUIT = register(new Identifier(MOD_ID, "haggstorm_fruit"), new Item(defaultSettings()));
 
         //Seeds
         CLOUD_BERRY_SEEDS = register(new Identifier(MOD_ID, "cloudberry_seeds"), new AliasedBlockItem(CropRegistry.CLOUD_BERRY_CROP, defaultSettings().food(FoodItems.FoodBackendSpecial(-6, -2f, false, false, StatusEffects.LEVITATION, 1f, 300))));
@@ -79,6 +83,10 @@ public class ItemRegistry extends Item {
         VOMPOLLOLOWM_SEEDS = register(new Identifier(MOD_ID, "vompollolowm_seeds"), new AliasedBlockItem(CropRegistry.VOMPOLLOLOWM_CROP_BASE, defaultSettings()));
         JELLY_PEAR_SEEDS = register(new Identifier(MOD_ID, "jelly_pear_seeds"), new AliasedBlockItem(CropRegistry.JELLY_PEAR_CROP, defaultSettings()));
         BLOODBUN_SEEDS = register(new Identifier(MOD_ID, "bloodbun_seeds"), new AliasedBlockItem(CropRegistry.BLOODBUN_CROP, defaultSettings()));
+        HAGGSTORM_SEEDS = register(new Identifier(MOD_ID, "haggstorm_seeds"), new AliasedBlockItem(CropRegistry.HAGGSTORM_CROP, defaultSettings()));
+
+        //Food
+        HAGGSTORM_GRILLED = register(new Identifier(MOD_ID, "haggstorm_grilled"), new Item(defaultSettings().food(FoodItems.FoodBackendSpecial(6, 1.5f, false, true, StatusEffects.GLOWING, 0.1f, 100))));
 
         CLOUD_BERRY_BUCKET = registerBucket("cloudberry_bucket", FluidRegistry.CLOUD_BERRY);
         CINDERMOTE_BUCKET = registerBucket("cinder_juice_bucket", FluidRegistry.CINDERMOTE);

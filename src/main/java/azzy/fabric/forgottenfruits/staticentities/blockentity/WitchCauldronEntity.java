@@ -58,17 +58,17 @@ public class WitchCauldronEntity extends MachineEntity implements HeatHolder {
             if (world.getTime() % 5 == 0 && metadata != null) {
                 fetchDroppedItems();
 
-                if (world.getTime() % 20 == 0) {
-                    if (config.isDebug())
-                        FFLog.error("Cauldron Temperature: " + heat);
-                    Block source = world.getBlockState(pos.down()).getBlock();
-                    BlockEntity entity = world.getBlockEntity(pos.down());
-                    if (entity instanceof HeatHolder) {
-                        HeatTransferHelper.simulateHeat(HeatTransferHelper.HeatMaterial.AIR, this, (HeatHolder) entity);
-                    } else if (HeatTransferHelper.isHeatSource(source)) {
-                        HeatTransferHelper.simulateHeat(HeatTransferHelper.HeatMaterial.AIR, this, source);
-                    }
+                if (config.isDebug())
+                    FFLog.error("Cauldron Temperature: " + heat);
+                Block source = world.getBlockState(pos.down()).getBlock();
+                BlockEntity entity = world.getBlockEntity(pos.down());
+                for(int i = 0; i < 4; i++) {
                     HeatTransferHelper.simulateAmbientHeat(this, world.getBiome(pos));
+                    if (entity instanceof HeatHolder) {
+                        HeatTransferHelper.simulateHeat(HeatTransferHelper.HeatMaterial.IRON, this, (HeatHolder) entity);
+                    } else if (HeatTransferHelper.isHeatSource(source)) {
+                        HeatTransferHelper.simulateHeat(HeatTransferHelper.HeatMaterial.IRON, this, source);
+                    }
                 }
             }
         }
@@ -207,5 +207,10 @@ public class WitchCauldronEntity extends MachineEntity implements HeatHolder {
     public void moveHeat(double change) {
         if (heat == null) heat = new AtomicDouble(change);
         else heat.addAndGet(change);
+    }
+
+    @Override
+    public double getArea() {
+        return 0;
     }
 }

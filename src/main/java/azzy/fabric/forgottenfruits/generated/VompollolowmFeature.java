@@ -38,17 +38,17 @@ public class VompollolowmFeature extends Feature<DefaultFeatureConfig> {
                         world.setBlockState(topPos.up(), Blocks.MOSSY_COBBLESTONE_SLAB.getDefaultState(), 3);
                 }
                 else if (random.nextInt(18) == 0)
-                    world.setBlockState(topPos, Blocks.MOSSY_COBBLESTONE_SLAB.getDefaultState(), 1);
+                    world.setBlockState(topPos, Blocks.MOSSY_COBBLESTONE_SLAB.getDefaultState(), 3);
         }
         return true;
     }
 
     private void generateStalk(ServerWorldAccess world, BlockPos pos, Random random){
-        world.setBlockState(pos, CropRegistry.VOMPOLLOLOWM_WILD_BASE.getDefaultState(), 1);
+        world.setBlockState(pos, CropRegistry.VOMPOLLOLOWM_WILD_BASE.getDefaultState(), 3);
         while(random.nextInt(15) != 0){
             pos = pos.up();
-            world.setBlockState(pos, CropRegistry.VOMPOLLOLOWM_WILD_STALK.getDefaultState(), 1);
+            world.setBlockState(pos, CropRegistry.VOMPOLLOLOWM_WILD_STALK.getDefaultState(), 3);
         }
-        world.setBlockState(pos.up(), CropRegistry.VOMPOLLOLOWM_WILD_FRUIT.getDefaultState(), 1);
+        world.setBlockState(pos.up(), CropRegistry.VOMPOLLOLOWM_WILD_FRUIT.getDefaultState(), 3);
     }
 }

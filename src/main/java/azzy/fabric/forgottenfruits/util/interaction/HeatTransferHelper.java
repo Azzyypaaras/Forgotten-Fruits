@@ -21,18 +21,22 @@ public class HeatTransferHelper {
 
     private static double calculateHeat(HeatMaterial medium, double bodyATemp, HeatSource bodyB) {
         double transfer;
-        transfer = medium.transfer * Math.pow(bodyB.size, 2) * (bodyATemp - bodyB.temp);
+        transfer = (medium.transfer / 419) * Math.pow(bodyB.size, 2) * (bodyATemp - bodyB.temp);
         return transfer;
     }
 
-    private static double calculateHeat(HeatMaterial medium, double bodyATemp, double bodyBTemp) {
+    private static double calculateHeat(HeatMaterial medium, double bodyATemp, double bodyBTemp, double area) {
         double transfer;
-        transfer = medium.transfer * 0.75 * (bodyATemp - bodyBTemp);
+        transfer = (medium.transfer / 419) * area * (bodyATemp - bodyBTemp);
         return transfer;
     }
 
     public static <T extends HeatHolder> void simulateHeat(HeatMaterial medium, T bodyA, T bodyB) {
-        double flux = calculateHeat(medium, bodyA.getHeat(), bodyB.getHeat());
+        double area = Math.min(bodyA.getArea(), bodyB.getArea());
+        if(bodyA.forceArea() || bodyB.forceArea()){
+            area = bodyA.forceArea() ? bodyA.getArea() : bodyB.getArea();
+        }
+        double flux = calculateHeat(medium, bodyA.getHeat(), bodyB.getHeat(), area);
         bodyA.moveHeat(-flux);
         bodyB.moveHeat(flux);
     }
@@ -40,6 +44,7 @@ public class HeatTransferHelper {
     public static <T extends HeatHolder> void simulateHeat(HeatMaterial medium, T bodyA, Block bodyB) {
         HeatSource source = heatMap.get(bodyB);
         double flux = calculateHeat(medium, bodyA.getHeat(), source);
+        flux = bodyA.getHeat() > source.temp ? -flux : flux;
         bodyA.moveHeat(-flux);
     }
 
@@ -58,7 +63,7 @@ public class HeatTransferHelper {
     }
 
     public static <T extends HeatHolder> void simulateAmbientHeat(T bodyA, Biome biome) {
-        double flux = calculateHeat(HeatMaterial.AIR, bodyA.getHeat(), translateBiomeHeat(biome));
+        double flux = calculateHeat(HeatMaterial.AIR, bodyA.getHeat(), translateBiomeHeat(biome), bodyA.getArea());
         bodyA.moveHeat(-flux);
     }
 
@@ -102,10 +107,14 @@ public class HeatTransferHelper {
             this.size = size;
         }
 
-        public HeatSource getSource(Block block) {
+        public static HeatSource getSource(Block block) {
             if (heatMap.containsKey(block))
                 return heatMap.get(block);
             return null;
+        }
+
+        public int getTemp() {
+            return temp;
         }
     }
 }

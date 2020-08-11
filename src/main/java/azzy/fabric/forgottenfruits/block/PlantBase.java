@@ -4,6 +4,8 @@ import azzy.fabric.forgottenfruits.util.interaction.PlantType.*;
 import azzy.fabric.forgottenfruits.util.context.ContextConsumer;
 import azzy.fabric.forgottenfruits.util.context.ContextMap;
 import azzy.fabric.forgottenfruits.util.context.PlantPackage;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
@@ -22,10 +24,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.GameRules;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
@@ -39,10 +38,11 @@ public class PlantBase extends CropBlock implements FluidFillable {
     private final VoxelShape shape;
     private final PLANTTYPE type;
     private final ContextMap<PlantPackage, PlantPackage.Context> contextConsumers;
-    private final boolean solid;
+    protected final boolean solid;
     private final FluidState fluid;
+    private final boolean fertilizable;
 
-    public PlantBase(PLANTTYPE type, int stages, Material material, BlockSoundGroup sound, ItemConvertible seeds, int minLight, int maxLight, ContextConsumer ... consumers) {
+    public PlantBase(PLANTTYPE type, int stages, Material material, BlockSoundGroup sound, ItemConvertible seeds, int minLight, int maxLight, boolean fertilizable, ContextConsumer<?, ?> ... consumers) {
         super(FabricBlockSettings.of(material).sounds(sound).breakInstantly().ticksRandomly().noCollision());
         maxAge = stages - 1;
         this.setDefaultState((this.getStateManager().getDefaultState()).with(this.getAgeProperty(), 0));
@@ -54,9 +54,10 @@ public class PlantBase extends CropBlock implements FluidFillable {
         this.contextConsumers = ContextMap.construct(consumers);
         this.solid = false;
         this.fluid = Fluids.EMPTY.getDefaultState();
+        this.fertilizable = fertilizable;
     }
 
-    public PlantBase(FabricBlockSettings settings, PLANTTYPE type, int stages, Material material, BlockSoundGroup sound, ItemConvertible seeds, int minLight, int maxLight, ContextConsumer ... consumers) {
+    public PlantBase(FabricBlockSettings settings, PLANTTYPE type, int stages, ItemConvertible seeds, int minLight, int maxLight, boolean fertilizable, ContextConsumer<?, ?> ... consumers) {
         super(settings);
         maxAge = stages - 1;
         this.setDefaultState((this.getStateManager().getDefaultState()).with(this.getAgeProperty(), 0));
@@ -68,14 +69,10 @@ public class PlantBase extends CropBlock implements FluidFillable {
         this.contextConsumers = ContextMap.construct(consumers);
         this.solid = false;
         this.fluid = Fluids.EMPTY.getDefaultState();
+        this.fertilizable = fertilizable;
     }
 
-    @Override
-    public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
-        return new ItemStack(this.getSeedsItem());
-    }
-
-    public PlantBase(PLANTTYPE type, int stages, Material material, BlockSoundGroup sound, ItemConvertible seeds, int minLight, int maxLight, VoxelShape shape, boolean solid, ContextConsumer ... consumers) {
+    public PlantBase(PLANTTYPE type, int stages, Material material, BlockSoundGroup sound, ItemConvertible seeds, int minLight, int maxLight, VoxelShape shape, boolean solid, boolean fertilizable, ContextConsumer<?, ?> ... consumers) {
         super(FabricBlockSettings.of(material).sounds(sound).breakInstantly().ticksRandomly().noCollision());
         maxAge = stages - 1;
         this.setDefaultState((this.getStateManager().getDefaultState()).with(this.getAgeProperty(), 0));
@@ -90,9 +87,10 @@ public class PlantBase extends CropBlock implements FluidFillable {
         this.contextConsumers = ContextMap.construct(consumers);
         this.solid = solid;
         this.fluid = Fluids.EMPTY.getDefaultState();
+        this.fertilizable = fertilizable;
     }
 
-    public PlantBase(PLANTTYPE type, int stages, Material material, BlockSoundGroup sound, ItemConvertible seeds, int minLight, int maxLight, VoxelShape shape, boolean solid, FluidState fluid, ContextConsumer ... consumers) {
+    public PlantBase(PLANTTYPE type, int stages, Material material, BlockSoundGroup sound, ItemConvertible seeds, int minLight, int maxLight, VoxelShape shape, boolean solid, FluidState fluid, boolean fertilizable, ContextConsumer<?, ?> ... consumers) {
         super(FabricBlockSettings.of(material).sounds(sound).breakInstantly().ticksRandomly().noCollision());
         maxAge = stages - 1;
         this.setDefaultState((this.getStateManager().getDefaultState()).with(this.getAgeProperty(), 0));
@@ -107,6 +105,7 @@ public class PlantBase extends CropBlock implements FluidFillable {
         this.contextConsumers = ContextMap.construct(consumers);
         this.solid = solid;
         this.fluid = fluid;
+        this.fertilizable = fertilizable;
     }
 
     @Override
@@ -130,6 +129,8 @@ public class PlantBase extends CropBlock implements FluidFillable {
         }
         return super.getStateForNeighborUpdate(state, direction, newState, world, pos, posFrom);
     }
+
+
 
     @Override
     public int getMaxAge() {
@@ -204,7 +205,17 @@ public class PlantBase extends CropBlock implements FluidFillable {
         }
     }
 
-    private void fallbackTick(PlantPackage plantPackage){
+    @Override
+    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
+        contextConsumers.executeWithFallback(new PlantPackage(state, world, pos, null), PlantPackage.Context.FERTILIZATION, this::fallbackGrowth);
+    }
+
+    @Override
+    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+        return (world.getBaseLightLevel(pos, 0) >= minLight && world.getBaseLightLevel(pos, 0) <= maxLight) && this.canPlantOnTop(world.getBlockState(pos), world, pos);
+    }
+
+    protected void fallbackTick(PlantPackage plantPackage){
         BlockState state = plantPackage.state;
         World world = plantPackage.world;
         BlockPos pos = plantPackage.pos;
@@ -212,9 +223,23 @@ public class PlantBase extends CropBlock implements FluidFillable {
         if (i < this.getMaxAge()) {
             float f = getAvailableMoisture(this, world, pos);
             if (world.random.nextInt((int) (25.0F / f) + 1) == 0) {
-                world.setBlockState(pos, this.withAge(i + 1), 2);
+                world.setBlockState(pos, this.withAge(i + 1), 3);
             }
         }
+    }
+
+    protected void fallbackGrowth(PlantPackage plantPackage){
+        BlockState state = plantPackage.state;
+        World world = plantPackage.world;
+        BlockPos pos = plantPackage.pos;
+        int i = this.getAge(state);
+        if (!this.isMature(state))
+                world.setBlockState(pos, this.withAge(i + 1), 3);
+    }
+
+    @Override
+    public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
+        return !this.isMature(state) && fertilizable;
     }
 
     @Override

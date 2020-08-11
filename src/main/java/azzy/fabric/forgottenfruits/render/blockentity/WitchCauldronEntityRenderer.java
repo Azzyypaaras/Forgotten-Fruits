@@ -23,7 +23,7 @@ public class WitchCauldronEntityRenderer extends BlockEntityRenderer<WitchCauldr
     @Override
     public void render(WitchCauldronEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
         if (entity.getMetadata() != null) {
-            int color = entity.getTracker().getColor();
+            int color = 0xFFFFFF; //entity.getTracker().getColor();
             int r = color >> 16 & 0xFF;
             int b = color >> 8 & 0xFF;
             int g = color & 0xFF;

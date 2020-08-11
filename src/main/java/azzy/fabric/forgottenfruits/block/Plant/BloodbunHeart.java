@@ -32,7 +32,7 @@ public class BloodbunHeart extends PlantBase implements BlockEntityProvider{
     private static final VoxelShape SHAPE = Block.createCuboidShape(0, 0, 0, 16, 5, 16);
 
     public BloodbunHeart(PlantType.PLANTTYPE type, int stages, Material material, BlockSoundGroup sound, ItemConvertible seeds, int minLight, int maxLight, ContextConsumer... consumers) {
-        super(type, stages, material, sound, seeds, minLight, maxLight, consumers);
+        super(type, stages, material, sound, seeds, minLight, maxLight, true, consumers);
     }
 
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {

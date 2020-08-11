@@ -22,8 +22,6 @@ import net.minecraft.world.World;
 
 public class BaseMachine extends HorizontalFacingBlock implements BlockEntityProvider, AttributeProvider {
 
-    public static final VoxelShape TOPDOWN = VoxelShapes.cuboid(1, 0, 1, 15, 16, 15);
-    public static final VoxelShape SIDES = VoxelShapes.cuboid(0, 1, 0, 16, 15, 16);
     protected final VoxelShape bounds;
     protected final ParticleEffect[] effects;
 
