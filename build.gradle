@@ -10,9 +10,9 @@ archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
-def libblockattributesver = "0.7.0"
-def libguiver = "2.1.1"
-def clothconfver = "4.5.6"
+def libblockattributesver = "0.7.1-pre.9"
+def libguiver = "3.0.0-beta.1+1.16.2-rc2"
+def clothconfver = "4.7.0-unstable"
 def autoconfver = "3.2.0-unstable"
 
 repositories {
@@ -42,24 +42,24 @@ repositories {
 
 dependencies {
 	//to change the versions see the gradle.properties file
-	minecraft "com.mojang:minecraft:1.16.1"
-	mappings "net.fabricmc:yarn:1.16.1+build.21:v2"
-	modImplementation "net.fabricmc:fabric-loader:0.9.0+build.204"
+	minecraft "com.mojang:minecraft:1.16.2"
+	mappings "net.fabricmc:yarn:1.16.2+build.1:v2"
+	modImplementation "net.fabricmc:fabric-loader:0.9.1+build.205"
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
-	modImplementation "net.fabricmc.fabric-api:fabric-api:0.15.1+build.380-1.16.1"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:0.17.2+build.396-1.16"
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.
 
 	//REQUIRED LIBRARIES
 	modCompile "alexiil.mc.lib:libblockattributes-all:"+libblockattributesver
 	modCompile "me.shedaniel:RoughlyEnoughItems:4.6.6"
-	modImplementation "io.github.cottonmc:LibGui:"+libguiver+"+1.16.1"
+	modImplementation "io.github.cottonmc:LibGui:"+libguiver
 	modApi "me.shedaniel.cloth:config-2:"+clothconfver
 	modApi "me.sargunvohra.mcmods:autoconfig1u:"+autoconfver
 
 	include "alexiil.mc.lib:libblockattributes-all:"+libblockattributesver
-	include "io.github.cottonmc:LibGui:"+libguiver+"+1.16.1"
+	include "io.github.cottonmc:LibGui:"+libguiver
 	include "me.shedaniel.cloth:config-2:"+clothconfver
 	include "me.sargunvohra.mcmods:autoconfig1u:"+autoconfver
 
@@ -67,13 +67,13 @@ dependencies {
 	//modCompile "grondag:canvas-mc116:1.0.839"
 
 	//NOTE, TESTING ONLY, NOT LIBRARIES, DO NOT IMPLEMENT AS LIBRARIES, DO NOT USE IN CODE
-	modCompile "alexiil.mc.lib:libmultipart-all:0.4.0"
-	modCompile "alexiil.mc.lib:libnetworkstack-base:0.4.0"
-	modCompile "alexiil.mc.mod:simplepipes-all:0.4.0"
+	//modCompile "alexiil.mc.lib:libmultipart-all:0.4.0"
+	//modCompile "alexiil.mc.lib:libnetworkstack-base:0.4.0"
+	//modCompile "alexiil.mc.mod:simplepipes-all:0.4.0"
 	modImplementation "io.github.prospector:modmenu:1.12.2+build.17"
 
 	// https://mvnrepository.com/artifact/org.apache.xmlbeans/xmlbeans
-	compile group: 'org.apache.xmlbeans', name: 'xmlbeans', version: '3.1.0'
+	//compile group: 'org.apache.xmlbeans', name: 'xmlbeans', version: '3.1.0'
 }
 
 processResources {
