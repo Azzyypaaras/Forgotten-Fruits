@@ -5,6 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.ServerWorldAccess;
+import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
@@ -25,10 +26,9 @@ public class PlantGen extends Feature<DefaultFeatureConfig> {
         this.steepness = steepness;
         this.tile = tile;
     }
-
     @Override
-    public boolean generate(ServerWorldAccess world, StructureAccessor accessor, ChunkGenerator generator, Random random, BlockPos pos, DefaultFeatureConfig config) {
-        BlockPos topPos = world.getTopPosition(Heightmap.Type.WORLD_SURFACE, pos);
+    public boolean generate(StructureWorldAccess world, ChunkGenerator chunkGenerator, Random random, BlockPos blockPos, DefaultFeatureConfig featureConfig) {
+        BlockPos topPos = world.getTopPosition(Heightmap.Type.WORLD_SURFACE, blockPos);
         double multiplier;
         for (int j = steepness; j > 0; j--) {
             BlockPos down = topPos.down();

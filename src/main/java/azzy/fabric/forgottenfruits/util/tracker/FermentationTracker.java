@@ -186,7 +186,7 @@ public class FermentationTracker {
             appliedTemp -= Math.pow((height - 100) / 150.0, 2);
         }
 
-        if (hasSkyAccess && world.isRaining() && biome.getTemperatureGroup() != Biome.TemperatureGroup.WARM) {
+        if (hasSkyAccess && world.isRaining() && biome.getCategory() != Biome.Category.DESERT) {
             if (biome.getTemperature() > 0)
                 appliedTemp -= 0.05;
             else

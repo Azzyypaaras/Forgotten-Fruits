@@ -10,9 +10,9 @@ archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
-def libblockattributesver = "0.7.1-pre.9"
+def libblockattributesver = "0.8.1"
 def libguiver = "3.0.0-beta.1+1.16.2-rc2"
-def clothconfver = "4.7.0-unstable"
+def clothconfver = "4.8.1"
 def autoconfver = "3.2.0-unstable"
 
 repositories {
@@ -28,16 +28,6 @@ repositories {
 		name = "Modmenu"
 		url = "https://maven.fabricmc.net/io/github/prospector/modmenu/"
 	}
-	maven {
-		name = "grondag"
-		url = "https://grondag-repo.appspot.com"
-		credentials {
-			username "guest"
-			password ""
-		}
-	}
-
-	jcenter()
 }
 
 dependencies {

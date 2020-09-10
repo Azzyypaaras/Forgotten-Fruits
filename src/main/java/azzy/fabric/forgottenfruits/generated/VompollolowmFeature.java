@@ -8,6 +8,7 @@ import net.minecraft.block.NetherWartBlock;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ServerWorldAccess;
+import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
@@ -24,9 +25,8 @@ public class VompollolowmFeature extends Feature<DefaultFeatureConfig> {
     }
 
     @Override
-    public boolean generate(ServerWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator generator, Random random, BlockPos pos, DefaultFeatureConfig config) {
+    public boolean generate(StructureWorldAccess world, ChunkGenerator chunkGenerator, Random random, BlockPos pos, DefaultFeatureConfig featureConfig) {
         BlockPos topPos = pos;
-
         for (BlockPos blockPos : BlockPos.iterate(topPos.add(24, 64, 24), topPos.add(-24, -16, -24))) {
             topPos = blockPos;
             if ((world.getBlockState(topPos.down()) == Blocks.STONE.getDefaultState() || (world.getBlockState(topPos.down(2)) == Blocks.STONE.getDefaultState()) && world.getBlockState(topPos.down()) == Blocks.SNOW.getDefaultState()) && world.isAir(topPos) && random.nextInt(3) == 0)
